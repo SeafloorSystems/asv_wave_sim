@@ -3,12 +3,12 @@
 
 #include "asv_wave_sim_gazebo_plugins/Gazebo.hh"
 
-#include <gazebo/common/common.hh>
-#include <gazebo/common/MeshManager.hh>
-#include <gazebo/rendering/ogre_gazebo.h>
-#include <gazebo/rendering/rendering.hh>
-#include <gazebo/rendering/RenderTypes.hh>
-#include <gazebo/rendering/Visual.hh>
+#include <ignition/common.hh>
+#include <ignition/common/MeshManager.hh>
+// #include <ignition/rendering/ogre_gazebo.h>
+#include <ignition/rendering.hh>
+// #include <ignition/rendering/RenderTypes.hh>
+// #include <ignition/rendering/Visual.hh>
 
 #include <cmath>
 #include <memory>
@@ -75,7 +75,7 @@ namespace asv
     rendering::Visual(_name, _parent),
     data(new OceanVisualPrivate)
   {
-    gzmsg << "Constructing OceanVisual..." << std::endl;
+    ignmsg << "Constructing OceanVisual..." << std::endl;
 
     rendering::Visual::SetType(VT_VISUAL);
   }
@@ -84,7 +84,7 @@ namespace asv
   {
     std::lock_guard<std::recursive_mutex> lock(this->data->mutex);
 
-    gzmsg << "Loading OceanVisual..." << std::endl;
+    ignmsg << "Loading OceanVisual..." << std::endl;
  
     GZ_ASSERT(_sdf != nullptr, "SDF Element is NULL");
 
@@ -93,7 +93,7 @@ namespace asv
 
     this->Load();
 
-    gzmsg << "Done loading OceanVisual." << std::endl;
+    ignmsg << "Done loading OceanVisual." << std::endl;
   }
 
   void OceanVisual::Load()
@@ -140,7 +140,7 @@ namespace asv
       {
         this->data->aboveOceanVisual.reset(new rendering::Visual(aboveOceanVisualName, shared_from_this()));
         this->data->aboveOceanVisual->Load();
-        gazebo::rendering::AttachMesh(*this->data->aboveOceanVisual, this->data->aboveOceanMeshName);
+        ignition::rendering::AttachMesh(*this->data->aboveOceanVisual, this->data->aboveOceanMeshName);
         this->data->aboveOceanVisual->SetPosition(this->Position());
         this->data->aboveOceanVisual->SetType(rendering::Visual::VT_VISUAL);
 
@@ -154,7 +154,7 @@ namespace asv
       {
         this->data->belowOceanVisual.reset(new rendering::Visual(belowOceanVisualName, shared_from_this()));
         this->data->belowOceanVisual->Load();
-        gazebo::rendering::AttachMesh(*this->data->belowOceanVisual, this->data->belowOceanMeshName);
+        ignition::rendering::AttachMesh(*this->data->belowOceanVisual, this->data->belowOceanMeshName);
         this->data->belowOceanVisual->SetPosition(this->Position());
         this->data->belowOceanVisual->SetType(rendering::Visual::VT_VISUAL);
 
@@ -165,21 +165,21 @@ namespace asv
       }
 
 #if DEBUG
-      gzmsg << "AboveOceanVisual..." << std::endl;
-      gzmsg << "Name: "                 << this->data->aboveOceanVisual->Name() << std::endl;
-      gzmsg << "Id: "                   << this->data->aboveOceanVisual->GetId() << std::endl;
-      gzmsg << "MaterialName: "         << this->data->aboveOceanVisual->GetMaterialName() << std::endl;
-      gzmsg << "MeshName: "             << this->data->aboveOceanVisual->GetMeshName() << std::endl;
-      gzmsg << "ShaderType: "           << this->data->aboveOceanVisual->GetShaderType() << std::endl;
-      gzmsg << "AttachedObjectCount: "  << this->data->aboveOceanVisual->GetAttachedObjectCount() << std::endl;
+      ignmsg << "AboveOceanVisual..." << std::endl;
+      ignmsg << "Name: "                 << this->data->aboveOceanVisual->Name() << std::endl;
+      ignmsg << "Id: "                   << this->data->aboveOceanVisual->GetId() << std::endl;
+      ignmsg << "MaterialName: "         << this->data->aboveOceanVisual->GetMaterialName() << std::endl;
+      ignmsg << "MeshName: "             << this->data->aboveOceanVisual->GetMeshName() << std::endl;
+      ignmsg << "ShaderType: "           << this->data->aboveOceanVisual->GetShaderType() << std::endl;
+      ignmsg << "AttachedObjectCount: "  << this->data->aboveOceanVisual->GetAttachedObjectCount() << std::endl;
 
-      gzmsg << "BelowOceanVisual..." << std::endl;
-      gzmsg << "Name: "                 << this->data->belowOceanVisual->Name() << std::endl;
-      gzmsg << "Id: "                   << this->data->belowOceanVisual->GetId() << std::endl;
-      gzmsg << "MaterialName: "         << this->data->belowOceanVisual->GetMaterialName() << std::endl;
-      gzmsg << "MeshName: "             << this->data->belowOceanVisual->GetMeshName() << std::endl;
-      gzmsg << "ShaderType: "           << this->data->belowOceanVisual->GetShaderType() << std::endl;
-      gzmsg << "AttachedObjectCount: "  << this->data->belowOceanVisual->GetAttachedObjectCount() << std::endl;
+      ignmsg << "BelowOceanVisual..." << std::endl;
+      ignmsg << "Name: "                 << this->data->belowOceanVisual->Name() << std::endl;
+      ignmsg << "Id: "                   << this->data->belowOceanVisual->GetId() << std::endl;
+      ignmsg << "MaterialName: "         << this->data->belowOceanVisual->GetMaterialName() << std::endl;
+      ignmsg << "MeshName: "             << this->data->belowOceanVisual->GetMeshName() << std::endl;
+      ignmsg << "ShaderType: "           << this->data->belowOceanVisual->GetShaderType() << std::endl;
+      ignmsg << "AttachedObjectCount: "  << this->data->belowOceanVisual->GetAttachedObjectCount() << std::endl;
 #endif
 
       this->SetVisibilityFlags(GZ_VISIBILITY_ALL);    
@@ -208,27 +208,27 @@ namespace asv
   {
     std::lock_guard<std::recursive_mutex> lock(this->data->mutex);
 
-    // gzmsg << "Updating OceanVisual..." << std::endl;
+    // ignmsg << "Updating OceanVisual..." << std::endl;
 
     if (this->data->paused)
       return;
 
     double time = this->data->simTime;
     // double time = std::fmod(this->data->simTime, _cycleTime);
-    // gzmsg << "Time: " << time << std::endl;
+    // ignmsg << "Time: " << time << std::endl;
 
     this->data->oceanTile->Update(time);
 
-    // gzmsg << "Done updating OceanVisual." << std::endl;
+    // ignmsg << "Done updating OceanVisual." << std::endl;
   }
 
   void OceanVisual::OnStatsMsg(ConstWorldStatisticsPtr &_msg)
   {
     std::lock_guard<std::recursive_mutex> lock(this->data->mutex);
 
-    this->data->simTime = gazebo::msgs::Convert(_msg->sim_time()).Double();
-    this->data->realTime = gazebo::msgs::Convert(_msg->real_time()).Double();
-    this->data->pauseTime = gazebo::msgs::Convert(_msg->pause_time()).Double();
+    this->data->simTime = ignition::msgs::Convert(_msg->sim_time()).Double();
+    this->data->realTime = ignition::msgs::Convert(_msg->real_time()).Double();
+    this->data->pauseTime = ignition::msgs::Convert(_msg->pause_time()).Double();
     this->data->paused = _msg->paused();
   }
 

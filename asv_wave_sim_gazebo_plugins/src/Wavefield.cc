@@ -22,8 +22,6 @@
 #include "asv_wave_sim_gazebo_plugins/OceanTile.hh"
 #include "asv_wave_sim_gazebo_plugins/TriangulatedGrid.hh"
 
-#include <gazebo/gazebo.hh>
-
 #include <ignition/math/Vector2.hh>
 #include <ignition/math/Vector3.hh>
 
@@ -160,7 +158,7 @@ namespace asv
 
   void WavefieldGerstner::SetParameters(std::shared_ptr<WaveParameters> _params) const
   {
-    GZ_ASSERT(_params != nullptr, "Invalid parameter _params");
+    // GZ_ASSERT(_params != nullptr, "Invalid parameter _params");
     this->data->params = _params;    
   }
 
@@ -301,7 +299,7 @@ namespace asv
     const std::string& _name) :
     data(new WavefieldOceanTilePrivate())
   {
-    gzmsg << "Constructing WavefieldOceanTile..." <<  std::endl;
+    ignmsg << "Constructing WavefieldOceanTile..." <<  std::endl;
 
     int N = 128;
     int NPlus1 = N + 1;
@@ -309,29 +307,29 @@ namespace asv
     double u = 5.0;
 
     // Wave parameters
-    gzmsg << "Creating WaveParameters." <<  std::endl;
+    ignmsg << "Creating WaveParameters." <<  std::endl;
     this->data->params.reset(new WaveParameters());
 
     // OceanTile
-    gzmsg << "Creating OceanTile." <<  std::endl;
+    ignmsg << "Creating OceanTile." <<  std::endl;
     this->data->oceanTile.reset(new OceanTile(N, L, false));
     this->data->oceanTile->SetWindVelocity(u, 0.0);
     this->data->oceanTile->Create();
     this->data->oceanTile->Update(0.0);
 
     // Grid
-    gzmsg << "Creating grid." <<  std::endl;
+    ignmsg << "Creating grid." <<  std::endl;
     this->data->grid.reset(new Grid({ L, L }, { static_cast<size_t>(NPlus1), static_cast<size_t>(NPlus1) }));
     
     // Point Locator
-    gzmsg << "Creating triangulated grid." <<  std::endl;
+    ignmsg << "Creating triangulated grid." <<  std::endl;
     this->data->triangulatedGrid = std::move(TriangulatedGrid::Create(N, L));
     // this->data->TriangulatedGrid->DebugPrintTriangulation();
     
     // Update
     this->Update(0.0);
 
-    gzmsg << "Done constructing WavefieldOceanTile." <<  std::endl;
+    ignmsg << "Done constructing WavefieldOceanTile." <<  std::endl;
   }
 
   std::shared_ptr<const Mesh> WavefieldOceanTile::GetMesh() const
@@ -356,7 +354,7 @@ namespace asv
 
   void WavefieldOceanTile::SetParameters(std::shared_ptr<WaveParameters> _params) const
   {
-    GZ_ASSERT(_params != nullptr, "Invalid parameter _params");
+    // GZ_ASSERT(_params != nullptr, "Invalid parameter _params");
     this->data->params = _params;    
   }
 

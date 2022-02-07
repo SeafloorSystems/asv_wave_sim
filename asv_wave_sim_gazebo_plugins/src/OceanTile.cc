@@ -7,9 +7,6 @@
 #include "asv_wave_sim_gazebo_plugins/WaveSimulationSinusoidal.hh"
 #include "asv_wave_sim_gazebo_plugins/WaveSimulationTrochoid.hh"
 
-// #include <Ogre.h>
-// #include <OgreRenderOperation.h>
-
 namespace asv
 {
     OceanTile::~OceanTile()
@@ -478,7 +475,7 @@ namespace asv
     Ogre::SubMesh* OceanTile::CreateMesh(const Ogre::String &_name, double _offsetZ, bool _reverseOrientation)
     {
         // Logging
-        gzmsg << "Creating OceanTile mesh..." << std::endl;
+        ignmsg << "Creating OceanTile mesh..." << std::endl;
 
         // Create mesh
         // @NOTE  Cannot hold a reference to the mesh pointer in the class
@@ -637,7 +634,7 @@ namespace asv
         // Load mesh
         mMesh->load();
 
-        gzmsg << "OceanTile mesh created." << std::endl;
+        ignmsg << "OceanTile mesh created." << std::endl;
         return subMesh;
     }
 
@@ -855,7 +852,8 @@ namespace asv
 
     const std::vector<ignition::math::Vector3i>& OceanTile::Faces() const
     {
-        return mFaces;        
+        return mFaces;
     }
 
 }
+
