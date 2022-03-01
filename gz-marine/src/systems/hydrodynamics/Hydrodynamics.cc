@@ -795,7 +795,8 @@ bool HydrodynamicsPrivate::InitPhysics(EntityComponentManager &_ecm)
     ignmsg << "Hydrodynamics: set water patch size: "
         << patchSize << std::endl;
     std::shared_ptr<marine::Grid> initWaterPatch(
-        new marine::Grid({patchSize, patchSize}, { 4, 4 }));
+        // new marine::Grid({patchSize, patchSize}, { 5, 5 }));
+        new marine::Grid({90, 90}, { 6, 6 }));
 
     // WavefieldSampler - this is updated by the pose of the link (not the CoM).
     /// \todo add checks that the wavefield weak_ptr is valid
