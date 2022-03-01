@@ -60,6 +60,11 @@
     </include> -->
 
     <include>
+      <pose>5 0 0 0 0 1.51</pose>
+      <uri>model://havyard</uri>
+    </include>
+
+    <include>
       <pose>15 0 0 0 0 1.51</pose>
       <uri>model://barrage</uri>
     </include>
