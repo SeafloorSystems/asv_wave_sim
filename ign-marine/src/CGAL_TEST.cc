@@ -452,7 +452,7 @@ TEST(CGAL, SurfaceMeshModifyGrid) {
     }
   }
 }
-
+#if 0
 TEST(CGAL, SurfaceMeshWavefield) {
   typedef CGAL::Simple_cartesian<double> K;
   typedef K::Point_3 Point3;
@@ -484,7 +484,7 @@ TEST(CGAL, SurfaceMeshWavefield) {
   params->SetPhase(0.0);
 
   // Wavefield
-  marine::WavefieldTrochoid wavefield("TestSurfaceMeshWavefield"); 
+  marine::Wavefield wavefield("TestSurfaceMeshWavefield"); 
   wavefield.SetParameters(params);
 
   // Evolve to t=10 with 1000 updates
@@ -506,7 +506,8 @@ TEST(CGAL, SurfaceMeshWavefield) {
   //   }
   // }
 }
-
+#endif
+#if 0
 TEST(CGAL, TBBParallelFor) {
   typedef std::vector<double>::iterator Iterator;
 
@@ -530,7 +531,7 @@ TEST(CGAL, TBBParallelFor) {
     // std::cout << v << std::endl;
   }
 }
-
+#endif
 TEST(CGAL, VertexRangeIterator) {
   // Mesh
   Point3 p0(0, 0, 0);

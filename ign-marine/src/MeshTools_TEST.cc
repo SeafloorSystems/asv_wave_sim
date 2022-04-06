@@ -104,7 +104,7 @@ void TestMakeSurfaceMeshUnitBox()
   //   std::cout << face << ": " << tri << std::endl;
   // }
 }
-
+#if 0
 void TestExportWaveMesh()
 {
   std::cout << "TestExportWaveMesh..." << std::endl;
@@ -171,6 +171,7 @@ void TestExportWaveMesh()
     "dae");
 
 }
+#endif
 
 void TestExportGridMesh()
 {
@@ -236,7 +237,7 @@ void RunMeshToolsTests()
 {
   TestFillArraysUnitBox();
   TestMakeSurfaceMeshUnitBox();
-  TestExportWaveMesh();
+  // TestExportWaveMesh();
   // TestExportGridMesh();
 }
 
