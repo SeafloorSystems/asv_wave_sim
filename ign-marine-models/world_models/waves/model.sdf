@@ -13,8 +13,8 @@
           <algorithm>fft</algorithm>
           <tile_size>1024</tile_size>
           <cell_count>128</cell_count>
-          <wind_velocity>7 0</wind_velocity>
-          <steepness>0.5</steepness>
+          <wind_velocity>6 0</wind_velocity>
+          <steepness>0.3</steepness>
 
           <!-- `trochoid` wave parameters -->
           <!-- <algorithm>trochoid</algorithm>
@@ -83,8 +83,8 @@
               <algorithm>fft</algorithm>
               <tile_size>1024</tile_size>
               <cell_count>128</cell_count>
-              <wind_velocity>7 0</wind_velocity>
-              <steepness>0.5</steepness>
+              <wind_velocity>6 0</wind_velocity>
+              <steepness>0.3</steepness>
 
               <!-- `trochoid` wave parameters -->
               <!-- <algorithm>trochoid</algorithm>
