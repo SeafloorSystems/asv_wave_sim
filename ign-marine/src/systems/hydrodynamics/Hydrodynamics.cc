@@ -791,7 +791,7 @@ bool HydrodynamicsPrivate::InitPhysics(EntityComponentManager &_ecm)
     /// \todo fix hardcoded patch size. CollisionBoundingBox is not currently available 
     // auto boundingBox = hd->link->CollisionBoundingBox();
     // double patchSize = 2.2 * boundingBox.Size().Length();
-    double patchSize = 20.0;
+    double patchSize = 30.0;
     ignmsg << "Hydrodynamics: set water patch size: "
         << patchSize << std::endl;
     std::shared_ptr<marine::Grid> initWaterPatch(

@@ -320,10 +320,11 @@ OceanTilePrivate<Vector3>::OceanTilePrivate(
     case 2:
     {
       // FFTW
+      double lambda = _params->Steepness();
       std::unique_ptr<WaveSimulationFFTW> waveSim(
           new WaveSimulationFFTW(_N, _L));
       waveSim->SetScale(4.0/_N);    // default 4.0/_N
-      waveSim->SetLambda(2.5);      // larger lambda => steeper waves.
+      waveSim->SetLambda(lambda);   // larger lambda => steeper waves.
       mWaveSim = std::move(waveSim);
       break;
     }
