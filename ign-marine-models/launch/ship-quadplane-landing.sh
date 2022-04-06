@@ -23,6 +23,7 @@ HOMELAT=51.587587
 HOMELONG=-3.954579
 HOMEALT=0.0
 
+# Default: CUAV
 # HOMELAT=-35.363262
 # HOMELONG=149.165237
 # HOMEALT=584.0
@@ -55,7 +56,7 @@ SYSID_THISMAV 2
 AUTO_OPTIONS 7
 EOF
 
-(cd sitl/ship && $ROVER -S --model JSON --home=$HOMELAT,$HOMELONG,$HOMEALT,0 --speedup 1 --slave 0 --instance 1 --sysid 2 --defaults $ship_DEFAULTS,leader.param) &
+(cd sitl/ship && $ROVER -S --model JSON --home=$HOMELAT,$HOMELONG,$HOMEALT,0 --speedup 1 --slave 0 --instance 1 --sysid 2 --defaults $SHIP_DEFAULTS,leader.param) &
 
 #--------------------------------------------------------------------
 # Quadplane
