@@ -452,7 +452,7 @@ TEST(CGAL, SurfaceMeshModifyGrid) {
     }
   }
 }
-
+#if 0
 TEST(CGAL, SurfaceMeshWavefield) {
   typedef CGAL::Simple_cartesian<double> K;
   typedef K::Point_3 Point3;
@@ -506,6 +506,7 @@ TEST(CGAL, SurfaceMeshWavefield) {
   //   }
   // }
 }
+#endif
 
 /// \todo: resolve TBB issues
 #if 0 
@@ -533,7 +534,6 @@ TEST(CGAL, TBBParallelFor) {
   }
 }
 #endif
-
 TEST(CGAL, VertexRangeIterator) {
   // Mesh
   Point3 p0(0, 0, 0);
