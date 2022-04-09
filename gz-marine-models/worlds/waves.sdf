@@ -91,12 +91,12 @@
     </model>
 
     <include>
-      <pose>0 0 0 0 0 0</pose>
-      <uri>model://wam-v_4x</uri>
+      <pose>0 0 1 0 0 0</pose>
+      <uri>model://havyard</uri>
     </include>
 
     <include>
-      <pose>0 0 5.45 0 0 0</pose>
+      <pose>-18 0 2.75 0 0 0</pose>
       <uri>model://alti_transition_quad</uri>
     </include>
 

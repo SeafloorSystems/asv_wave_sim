@@ -792,7 +792,7 @@ bool HydrodynamicsPrivate::InitPhysics(EntityComponentManager &_ecm)
     // auto boundingBox = hd->link->CollisionBoundingBox();
     // double patchSize = 2.2 * boundingBox.Size().Length();
     // size_t patchCellCount = 5;
-    double patchSize = 30.0;
+    double patchSize = 90.0;
     size_t patchCellCount = 5;
     ignmsg << "Hydrodynamics: set water patch size: "
         << patchSize << std::endl;
