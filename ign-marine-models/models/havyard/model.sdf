@@ -1,79 +1,8 @@
 <?xml version="1.0" ?>
 <sdf version="1.7">
   <model name="havyard">
-    <plugin
-        filename="ignition-marine1-hydrodynamics-system"
-        name="ignition::gazebo::systems::Hydrodynamics">
-        <damping_on>1</damping_on>
-        <viscous_drag_on>1</viscous_drag_on>
-        <pressure_drag_on>1</pressure_drag_on>
-        <!-- Defaults -->
-        <!-- <cDampL1>1.0E-6</cDampL1>
-        <cDampL2>1.0E-6</cDampL2>
-        <cDampR1>1.0E-6</cDampR1>
-        <cDampR2>1.0E-6</cDampR2>
-        <cPDrag1>1.0E+2</cPDrag1>
-        <cPDrag2>1.0E+2</cPDrag2>
-        <fPDrag>0.4</fPDrag>
-        <cSDrag1>1.0E+2</cSDrag1>
-        <cSDrag2>1.0E+2</cSDrag2>
-        <fSDrag>0.4</fSDrag>
-        <vRDrag>1.0</vRDrag> -->
-        <cDampL1>1.0E-3</cDampL1>
-        <cDampL2>1.0E-3</cDampL2>
-        <cDampR1>1.0E+6</cDampR1>
-        <cDampR2>1.0E+6</cDampR2>
-        <cPDrag1>1.0E+2</cPDrag1>
-        <cPDrag2>1.0E+2</cPDrag2>
-        <fPDrag>0.4</fPDrag>
-        <cSDrag1>1.0E+2</cSDrag1>
-        <cSDrag2>1.0E+2</cSDrag2>
-        <fSDrag>0.4</fSDrag>
-        <vRDrag>1.0</vRDrag>
-    </plugin>
 
     <link name="base_link">
-
-      <visual name="base_x_axis">
-        <pose>25 0 0 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>50 0.1 0.1</size>
-          </box>
-        </geometry>
-        <material>
-          <ambient>1.0 0.0 0.0 1.0</ambient>
-          <diffuse>1.0 0.0 0.0 1.0</diffuse>
-          <specular>0.8 0.8 0.8 1.0</specular>
-        </material>
-      </visual>
-      <visual name="base_y_axis">
-        <pose>0 10 0 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.1 20 0.1</size>
-          </box>
-        </geometry>
-        <material>
-          <ambient>0.0 1.0 0.0 1.0</ambient>
-          <diffuse>0.0 1.0 0.0 1.0</diffuse>
-          <specular>0.8 0.8 0.8 1.0</specular>
-        </material>
-      </visual>
-      <visual name="base_z_axis">
-        <pose>0 0 10 0 0 0</pose>
-        <geometry>
-          <box>
-            <size>0.1 0.1 20</size>
-          </box>
-        </geometry>
-        <material>
-          <ambient>0.0 0.0 1.0 1.0</ambient>
-          <diffuse>0.0 0.0 1.0 1.0</diffuse>
-          <specular>0.8 0.8 0.8 1.0</specular>
-        </material>
-      </visual>
-
       <visual name="hull">
         <geometry>
           <mesh>
@@ -147,13 +76,49 @@
         </geometry>
       </visual>
 
-      <!-- <visual name="hull_collision">
+      <!-- Leave axes visuals for debugging -->
+      <!--
+      <visual name="base_x_axis">
+        <pose>25 0 0 0 0 0</pose>
         <geometry>
-          <mesh>
-            <uri>mesh/hull_collision_x50.dae</uri>
-          </mesh>
+          <box>
+            <size>50 0.1 0.1</size>
+          </box>
         </geometry>
-      </visual> -->
+        <material>
+          <ambient>1.0 0.0 0.0 1.0</ambient>
+          <diffuse>1.0 0.0 0.0 1.0</diffuse>
+          <specular>0.8 0.8 0.8 1.0</specular>
+        </material>
+      </visual>
+      <visual name="base_y_axis">
+        <pose>0 10 0 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 20 0.1</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.0 1.0 0.0 1.0</ambient>
+          <diffuse>0.0 1.0 0.0 1.0</diffuse>
+          <specular>0.8 0.8 0.8 1.0</specular>
+        </material>
+      </visual>
+      <visual name="base_z_axis">
+        <pose>0 0 10 0 0 0</pose>
+        <geometry>
+          <box>
+            <size>0.1 0.1 20</size>
+          </box>
+        </geometry>
+        <material>
+          <ambient>0.0 0.0 1.0 1.0</ambient>
+          <diffuse>0.0 0.0 1.0 1.0</diffuse>
+          <specular>0.8 0.8 0.8 1.0</specular>
+        </material>
+      </visual>
+      -->
+
       <collision name="hull_collision">
         <geometry>
           <mesh>
@@ -161,15 +126,6 @@
           </mesh>
         </geometry>
       </collision>
-      <!-- <collision name="deck_collision">
-        <pose>-5 0 1.5 0 0 0</pose>
-        <geometry>
-          <plane>
-            <normal>0 0 1</normal>
-            <size>10 4</size>
-          </plane>
-        </geometry>
-      </collision> -->
 
       <inertial>
         <pose>0 0 -0.5 0 0 0</pose>
@@ -184,5 +140,181 @@
         </inertia>
       </inertial>
     </link>
+
+    <!-- Engines -->
+
+    <!-- Sensors -->
+    <link name="imu_link">
+      <inertial>
+        <pose>0 0 0 0 0 0</pose>
+        <mass>0.15</mass>
+        <inertia>
+          <ixx>0.00001</ixx>
+          <ixy>0</ixy>
+          <ixz>0</ixz>
+          <iyy>0.00002</iyy>
+          <iyz>0</iyz>
+          <izz>0.00002</izz>
+        </inertia>
+      </inertial>
+      <sensor name="imu_sensor" type="imu">
+        <pose>0 0 0 3.141593 0 0</pose>
+        <always_on>1</always_on>
+        <update_rate>1000.0</update_rate>
+      </sensor>
+    </link>
+    <joint name="imu_joint" type="revolute">
+      <child>imu_link</child>
+      <parent>base_link</parent>
+      <axis>
+        <xyz>0 0 1</xyz>
+        <limit>
+          <lower>0</lower>
+          <upper>0</upper>
+          <effort>0</effort>
+          <velocity>0</velocity>
+        </limit>
+        <dynamics>
+          <damping>1.0</damping>
+        </dynamics>
+      </axis>
+    </joint>
+
+    <!-- Joint state and force plugins -->
+    <plugin filename="libignition-gazebo-joint-state-publisher-system.so"
+      name="ignition::gazebo::systems::JointStatePublisher">
+    </plugin>
+    <!-- <plugin filename="libignition-gazebo-apply-joint-force-system.so"
+      name="ignition::gazebo::systems::ApplyJointForce">
+      <joint_name>left_engine_joint</joint_name>
+    </plugin>
+    <plugin filename="libignition-gazebo-apply-joint-force-system.so"
+      name="ignition::gazebo::systems::ApplyJointForce">
+      <joint_name>right_engine_joint</joint_name>
+    </plugin> -->
+
+    <!-- Thruster plugins -->
+    <!-- <plugin
+        filename="ignition-gazebo-thruster-system"
+        name="ignition::gazebo::systems::Thruster">
+      <namespace>wam-v</namespace>
+      <joint_name>left_propeller_joint</joint_name>
+      <use_angvel_cmd>0</use_angvel_cmd>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>1.92</propeller_diameter>
+      <thrust_coefficient>0.01</thrust_coefficient>
+      <velocity_control>1</velocity_control>
+      <max_thrust_cmd>40000.0</max_thrust_cmd>
+      <min_thrust_cmd>-40000.0</min_thrust_cmd>
+    </plugin>
+    <plugin
+        filename="ignition-gazebo-thruster-system"
+        name="ignition::gazebo::systems::Thruster">
+      <namespace>wam-v</namespace>
+      <joint_name>right_propeller_joint</joint_name>
+      <use_angvel_cmd>0</use_angvel_cmd>
+      <fluid_density>1000</fluid_density>
+      <propeller_diameter>1.92</propeller_diameter>
+      <thrust_coefficient>0.01</thrust_coefficient>
+      <velocity_control>1</velocity_control>
+      <max_thrust_cmd>40000.0</max_thrust_cmd>
+      <min_thrust_cmd>-40000.0</min_thrust_cmd>
+    </plugin> -->
+
+    <!-- Hydrodynamics plugin -->
+    <plugin
+      filename="ignition-marine1-hydrodynamics-system"
+      name="ignition::gazebo::systems::Hydrodynamics">
+      <damping_on>1</damping_on>
+      <viscous_drag_on>1</viscous_drag_on>
+      <pressure_drag_on>1</pressure_drag_on>
+      <cDampL1>1.0E-3</cDampL1>
+      <cDampL2>1.0E-3</cDampL2>
+      <cDampR1>1.0E+7</cDampR1>
+      <cDampR2>1.0E+7</cDampR2>
+      <cPDrag1>1.0E+2</cPDrag1>
+      <cPDrag2>1.0E+2</cPDrag2>
+      <fPDrag>0.4</fPDrag>
+      <cSDrag1>1.0E+2</cSDrag1>
+      <cSDrag2>1.0E+2</cSDrag2>
+      <fSDrag>0.4</fSDrag>
+      <vRDrag>1.0</vRDrag>
+    </plugin>
+
+    <!-- ArduPilot plugin -->
+    <plugin name="ArduPilotPlugin" filename="libArduPilotPlugin.so">
+      <fdm_addr>127.0.0.1</fdm_addr>
+      <fdm_port_in>9012</fdm_port_in>
+      <connectionTimeoutMaxCount>5</connectionTimeoutMaxCount>
+      <lock_step>1</lock_step>
+      <modelXYZToAirplaneXForwardZDown>0 0 0 3.141593 0 0</modelXYZToAirplaneXForwardZDown>
+      <gazeboXYZToNED>0 0 0 3.141593 0 0</gazeboXYZToNED>
+      <imuName>imu_sensor</imuName>
+
+      <!--
+        SERVO1_FUNCTION 26 (GroundSteering)
+      -->
+      <!-- <control channel="0">
+        <jointName>left_engine_joint</jointName>
+        <useForce>1</useForce>
+        <multiplier>3.1415926</multiplier>
+        <offset>-0.5</offset>
+        <servo_min>1000</servo_min>
+        <servo_max>2000</servo_max>
+        <type>POSITION</type>
+        <p_gain>200000.0</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>100</d_gain>
+        <i_max>-1</i_max>
+        <i_min>0</i_min>
+        <cmd_max>1000000.0</cmd_max>
+        <cmd_min>-1000000.0</cmd_min>
+      </control>
+      <control channel="0">
+        <jointName>right_engine_joint</jointName>
+        <useForce>1</useForce>
+        <multiplier>3.1415926</multiplier>
+        <offset>-0.5</offset>
+        <servo_min>1000</servo_min>
+        <servo_max>2000</servo_max>
+        <type>POSITION</type>
+        <p_gain>200000.0</p_gain>
+        <i_gain>0</i_gain>
+        <d_gain>100</d_gain>
+        <i_max>-1</i_max>
+        <i_min>0</i_min>
+        <cmd_max>1000000.0</cmd_max>
+        <cmd_min>-1000000.0</cmd_min>
+      </control> -->
+
+        <!--
+          SERVO3_FUNCTION 70 (Throttle)
+
+          max thrust: +/- 150000 N (larger than VRX settings of +250 N / -100 N)
+          left prop:  ccw about rotation axis (+ve)
+          right prop: cw about rotation axis (-ve)
+        -->
+      <!-- <control channel="2">
+        <jointName>left_propeller_joint</jointName>
+        <useForce>1</useForce>
+        <multiplier>60000</multiplier>
+        <offset>-0.5</offset>
+        <servo_min>1000</servo_min>
+        <servo_max>2000</servo_max>
+        <type>COMMAND</type>
+        <cmd_topic>/model/wam-v/joint/left_propeller_joint/cmd_thrust</cmd_topic>
+      </control>
+      <control channel="2">
+        <jointName>right_propeller_joint</jointName>
+        <useForce>1</useForce>
+        <multiplier>60000</multiplier>
+        <offset>-0.5</offset>
+        <servo_min>1000</servo_min>
+        <servo_max>2000</servo_max>
+        <type>COMMAND</type>
+        <cmd_topic>/model/wam-v/joint/right_propeller_joint/cmd_thrust</cmd_topic>
+      </control> -->
+    </plugin>
+
   </model>
 </sdf>
