@@ -48,7 +48,7 @@ HOMEALT=0.0
 
 mkdir -p sitl/ship
 
-SHIP_DEFAULTS="$IGN_MARINE_MODELS_DIR/config/wam-v.param"
+SHIP_DEFAULTS="$IGN_MARINE_MODELS_DIR/config/havyard.param"
 
 # additional parameter file for the ship unit
 cat <<EOF > sitl/ship/leader.param
