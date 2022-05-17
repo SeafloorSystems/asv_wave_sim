@@ -2,7 +2,7 @@
 <sdf version="1.7">
   <model name="havyard">
     <plugin
-        filename="ignition-marine1-hydrodynamics-system"
+        filename="gazebo_marine1-hydrodynamics-system"
         name="ignition::gazebo::systems::Hydrodynamics">
         <damping_on>1</damping_on>
         <viscous_drag_on>1</viscous_drag_on>

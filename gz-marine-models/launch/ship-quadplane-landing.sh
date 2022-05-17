@@ -10,7 +10,7 @@ trap "killall -9 arduplane & killall -9 ardurover" SIGINT SIGTERM EXIT
 # edit the location of these directories if different
 ARDUPILOT_ROOT="$HOME/Code/ardupilot/ardupilot"
 SITL_MODELS_DIR="$HOME/Code/ardupilot/simulation/SITL_Models"
-IGN_MARINE_MODELS_DIR="$HOME/Code/robotics/ign_wave_sim/wave_sim_ws/src/asv_wave_sim/ign-marine-models"
+GZ_MARINE_MODELS_DIR="$HOME/Code/robotics/ign_wave_sim/wave_sim_ws/src/asv_wave_sim/gz-marine-models"
 
 # assume we start the script from the root directory
 ROOTDIR=$ARDUPILOT_ROOT
@@ -48,7 +48,7 @@ HOMEALT=0.0
 
 mkdir -p sitl/ship
 
-SHIP_DEFAULTS="$IGN_MARINE_MODELS_DIR/config/wam-v.param"
+SHIP_DEFAULTS="$GZ_MARINE_MODELS_DIR/config/wam-v.param"
 
 # additional parameter file for the ship unit
 cat <<EOF > sitl/ship/leader.param
