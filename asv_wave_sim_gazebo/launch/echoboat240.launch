@@ -1,0 +1,52 @@
+<launch>
+  <!-- 
+    These are the arguments you can pass this launch file.
+    See: gazebo_ros/launch/empty_world.launch for details.
+  -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="extra_gazebo_args" default=""/>
+  <arg name="gui" default="true"/>
+  <arg name="recording" default="false"/>
+  <arg name="debug" default="false"/>
+  <arg name="verbose" default="false"/>
+  <arg name="robot_urdf" default="$(find echoboat240_description)/description/echoboat240.urdf.xacro"/>
+  <arg name="zed2_x" default="0.000"/>
+  <arg name="zed2_y" default="0.00"/>
+  <arg name="zed2_z" default="0.0032"/>
+
+  <arg name="zed2_roll" default="0.0"/>
+  <arg name="zed2_pitch" default="0.0"/>
+  <arg name="zed2_yaw" default="0.0"/>
+
+  <param name="robot_description" 
+    command="$(find xacro)/xacro '$(arg robot_urdf)' zed2_x:=$(arg zed2_x) zed2_y:=$(arg zed2_y) zed2_z:=$(arg zed2_z) zed2_roll:=$(arg zed2_roll) zed2_pitch:=$(arg zed2_pitch) zed2_yaw:=$(arg zed2_yaw)"/>
+
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="15.0" />
+  </node>
+
+  <!-- Resume the logic in empty_world.launch, over-riding a number of arguments -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find asv_wave_sim_gazebo)/worlds/mumbles_head.world" />
+    <arg name="paused" value="$(arg paused)" />
+    <arg name="use_sim_time" value="$(arg use_sim_time)" />
+    <arg name="extra_gazebo_args" value="$(arg extra_gazebo_args)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="recording" value="$(arg recording)" />
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="verbose" value="$(arg verbose)" />
+  </include>
+
+  <node name="spawn_robot_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+        args="-x 350 -y -100 -z 10 -Y 90 -urdf -param robot_description -model echoboat240" />
+
+  <!-- RViz -->
+  <arg name="rviz" default="false"/>
+  <node if="$(arg rviz)" pkg="rviz" type="rviz" name="$(anon rviz)" respawn="false" output="screen" args="-d $(find echoboat240_description)/rviz/echoboat240.rviz" />
+  <!-- Publishes revolute joint static transforms (gps and imu) to /tf -->
+  <!--<node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
+    <param name="gui" value="false" />
+  </node>-->
+   
+</launch>
