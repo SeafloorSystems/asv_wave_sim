@@ -19,13 +19,6 @@
   <arg name="zed2_pitch" default="0.0"/>
   <arg name="zed2_yaw" default="0.0"/>
 
-  <param name="robot_description" 
-    command="$(find xacro)/xacro '$(arg robot_urdf)' zed2_x:=$(arg zed2_x) zed2_y:=$(arg zed2_y) zed2_z:=$(arg zed2_z) zed2_roll:=$(arg zed2_roll) zed2_pitch:=$(arg zed2_pitch) zed2_yaw:=$(arg zed2_yaw)"/>
-
-  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
-        <param name="publish_frequency" type="double" value="15.0" />
-  </node>
-
   <!-- Resume the logic in empty_world.launch, over-riding a number of arguments -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="world_name" value="$(find asv_wave_sim_gazebo)/worlds/mumbles_head.world" />
@@ -38,15 +31,22 @@
     <arg name="verbose" value="$(arg verbose)" />
   </include>
 
+  <param name="robot_description" 
+    command="$(find xacro)/xacro --inorder '$(arg robot_urdf)' zed2_x:=$(arg zed2_x) zed2_y:=$(arg zed2_y) zed2_z:=$(arg zed2_z) zed2_roll:=$(arg zed2_roll) zed2_pitch:=$(arg zed2_pitch) zed2_yaw:=$(arg zed2_yaw)"/>
   <node name="spawn_robot_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
         args="-x 350 -y -100 -z 10 -Y 90 -urdf -param robot_description -model hydrocat180" />
+
+  <!-- Publishes revolute joint static transforms (gps and imu) to /tf -->
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" output="screen">
+    <param name="gui" value="false" />
+  </node>
+  
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+        <param name="publish_frequency" type="double" value="30.0" />
+  </node>  
 
   <!-- RViz -->
   <arg name="rviz" default="false"/>
   <node if="$(arg rviz)" pkg="rviz" type="rviz" name="$(anon rviz)" respawn="false" output="screen" args="-d $(find hydrocat180_description)/rviz/hydrocat180.rviz" />
-  <!-- Publishes revolute joint static transforms (gps and imu) to /tf -->
-  <!--<node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
-    <param name="gui" value="false" />
-  </node>-->
    
 </launch>
