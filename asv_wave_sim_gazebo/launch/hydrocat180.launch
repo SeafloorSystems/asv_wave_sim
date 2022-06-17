@@ -36,10 +36,13 @@
   <node name="spawn_robot_urdf" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
         args="-x 350 -y -100 -z 10 -Y 90 -urdf -param robot_description -model hydrocat180" />
 
-  <!-- Publishes revolute joint static transforms (gps and imu) to /tf -->
-  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher" output="screen">
-    <param name="gui" value="false" />
-  </node>
+  <rosparam command="load"
+            file="$(find hydrocat180_description)/config/joints.yaml"
+            ns="hydrocat180_joint_state_controller" />
+
+  <node name="hydrocat180_controller_spawner" pkg="controller_manager" type="spawner"
+    args="hydrocat180_joint_state_controller
+          --shutdown-timeout 3"/>
   
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
         <param name="publish_frequency" type="double" value="30.0" />
