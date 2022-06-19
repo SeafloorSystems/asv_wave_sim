@@ -48,6 +48,11 @@
         <param name="publish_frequency" type="double" value="30.0" />
   </node>  
 
+  <!-- Publishes revolute joint static transforms (gps and imu) to /tf -->
+  <node pkg="joint_state_publisher" type="joint_state_publisher" name="joint_state_publisher">
+    <param name="gui" value="false" />
+  </node>
+
   <!-- RViz -->
   <arg name="rviz" default="false"/>
   <node if="$(arg rviz)" pkg="rviz" type="rviz" name="$(anon rviz)" respawn="false" output="screen" args="-d $(find hydrocat180_description)/rviz/hydrocat180.rviz" />
